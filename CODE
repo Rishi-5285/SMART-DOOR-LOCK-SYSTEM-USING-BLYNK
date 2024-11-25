@@ -1,0 +1,48 @@
+1.	#define BLYNK_PRINT Serial 
+2.	#include <ESP8266WiFi.h>
+3.	#include <BlynkSimpleEsp8266.h>
+4.	//Define the relay pins
+5.	#define relay1 DO
+6.	#define relay2 D1
+7.	 
+8.	#define BLYNK_AUTH_TOKEN "NlIpoXSZGC8q0LRKDBe5C5T1pkUPraky" //Enter your blynk auth token
+9.	 
+10.	char auth[]=BLYNK_AUTH_TOKEN;
+11.	char ssid[] = "Rishitha Reddy";//Enter your WIFI name
+12.	char pass[] = "rishitha76"; //Enter your WIFI password
+13.	//Get the button values
+14.	BLYNK_WRITE(V0) {
+15.	bool value1 = param.asInt();
+16.	  // Check these values and turn the relay1 ON and OFF 
+17.	if (value1 == 1) {
+18.	    digitalWrite(relay1, LOW);
+19.	} else {
+20.	    digitalWrite(relay1, HIGH);
+21.	}
+22.	}
+23.	  //Get the button values
+24.	BLYNK_WRITE(V1) {
+25.	  bool value2 = param.asInt();
+26.	  // Check these values and turn the relay2 ON and OFF
+27.	  if (value2 == 1) {
+28.	      digitalWrite(relay2, LOW);
+29.	  } else {
+30.	 
+31.	       digitalWrite(relay2, HIGH);
+32.	  }
+33.	}
+34.	void setup() {
+35.	 
+36.	  //Set the relay pins as output pins
+37.	  pinMode(relay1, OUTPUT); 
+38.	  pinMode(relay2, OUTPUT);
+39.	  // Turn OFF the relay 
+40.	  digitalWrite(relay1, HIGH); 
+41.	  digitalWrite(relay2, HIGH);
+42.	//Initialize the Blynk library
+43.	   Blynk.begin(auth, ssid, pass, "blynk.cloud", 80);
+44.	}
+45.	void loop() {
+46.	   //Run the Blynk library
+47.	   Blynk.run();
+48.	}
